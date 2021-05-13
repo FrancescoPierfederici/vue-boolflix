@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoolFlix</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <input v-model="textToSearch" type="text">
+            <button @click="doSearch">
+                Cerca
+            </button>
+        </div>
+
+        <!-- Ogni li dovrà stampare
+    // 1.Titolo
+    // 2.Titolo Originale
+    // 3.Lingua
+    // 4.Voto -->
+
+        <ul>
+            <li>
+                <p>TITOLO</p>
+                <p>TITOLO ORIGINALE</p>
+                <p>LINGUA</p>
+                <p>VOTO</p>
+                
+            </li>
+        </ul>
+
+    </div>
+
+
+    <script src="myscript.js"></script>
+</body>
+
+</html>
