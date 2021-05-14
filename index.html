@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 </head>
 
 <body>
@@ -29,15 +30,15 @@
     // 4.Voto -->
 
         <ul>
-            <li>
-                <p>TITOLO</p>
-                <p>TITOLO ORIGINALE</p>
-                <p>LINGUA</p>
-                <p>VOTO</p>
+            <li v-for="films in moviesList">
+                <p>Titolo: {{films.title}}  </p>
+                <p>Titolo Originale: {{films.original_title }}</p>
+                <p>Lingua: {{films.original_language }}</p>
                 
+                <p>Voto: {{films.vote_average }}</p>
             </li>
         </ul>
-
+<!-- <span class="flag-icon flag-icon-querylang"></span> -->
     </div>
 
 

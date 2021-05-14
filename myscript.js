@@ -5,9 +5,27 @@
 // 4.Voto
 
 
-// Milestone 2:Trasformiamo la stringa statica della lingua in unavera e propria bandiera dellanazione corrispondente, gestendo il caso in cui non abbiamo la bandiera dellanazione ritornata dall’API (le flag non ci sono inFontAwesome).Allarghiamo poi la ricerca anche alle serie tv. Conla stessa azione di ricercadovremo prendere sia i film che corrispondono allaquery, sia le serie tv, standoattenti ad avere alla fine dei valori simili (le serie e i film hanno campi nel JSON dirisposta diversi, simili ma non sempre identici)Qui un esempio di chiamata per le serie tv:https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=scrubs
+// Milestone 2:Trasformiamo la stringa statica della lingua in unavera e propria bandiera della nazione corrispondente, gestendo il caso in cui non abbiamo la bandiera della nazione ritornata dall’API (le flag non ci sono inFontAwesome).Allarghiamo poi la ricerca anche alle serie tv. Conla stessa azione di ricerca dovremo prendere sia i film che corrispondono alla query, sia le serie tv, stando attenti ad avere alla fine dei valori simili (le serie e i film hanno campi nel JSON di risposta diversi, simili ma non sempre identici)Qui un esempio di chiamata per le serie tv:https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=scrubs
 
 
+
+/* 
+Le bandiere rappresentano dei country e non le languages ! Vuol dire che non potete usare direttamente i codici che vi restituisce l'API per cercare una bandiera nel CSS menzionato sopra.... Dovete definire voi una mappa. Come? Esempio...definisco la mappa ( non le mappo tutte, solo le piu importanti, altrimenti ci perdo la vista... )
+const lang2country = { 
+    'en': ['gb', 'us', 'ca'],
+    'es': ['es', 'ar', ....],
+    ........................
+ }
+ // scelgo una bandiera che usero' in caso non trovassi quelle che cercavo
+ const fallbackFlag = ....
+ // ottengo la lingua di cui voglio trovare le bandiere dei country associati
+ const queryLang = ...;
+ // cerco le bandiere a partire dalla mappa e le salvo per essere usate successivamente
+ const candidatesCountries = Object.keys(lang2country).includes(queryLang) ? lang2country[queryLang] : [fallbackFlag]
+ // Object.keys() andatelo a vedere su MDN 
+ // .includes() lo conoscete
+ // il ternario semplifica un blocco if/else in una riga
+*/
 
 
 
@@ -18,9 +36,7 @@ new Vue({
         tvSeriesList: [],
         textToSearch: "",
         tmdbApiKey: "6b350ec46cfeb65b477fdc2bd01d820a",
-        // flagsMap:{
-        //     en:"https:" oppure una classe
-        // }
+        
     },
 
     methods: {
@@ -64,6 +80,7 @@ new Vue({
             .then((resp) => {
                 if (searchType === "movie") {
                     this.moviesList = resp.data.results
+                    
                 } else if (searchType === "tv") {
                     this.tvSeriesList = resp.data.results
                     /*
@@ -84,10 +101,22 @@ new Vue({
                         tvShow.title = tvShow.name
                         return tvShow
                     })
+                    this.moviesList.concat(this.tvSeriesList)
+                    this.moviesList=this.moviesList
                 }
 
+            const lang2country = { 
+            'en': ['gb', 'us', 'ca'],
+            'es': ['es', 'ar'],
+            'it':['it'],
+            'fr':['fr'],
+            'de':['de'],
+            'cn':['cn'],
+            };
+            const  fallbackFlag ="va";
+            const queryLang = films.original_language ;
 
-
+            const candidatesCountries = Object.keys(lang2country).includes(queryLang) ? lang2country[queryLang] : [fallbackFlag];
 
 
             })
