@@ -6,22 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoolFlix</title>
+
+    <!-- CDN axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- CDN vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!-- CDN bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- CDN vue -->
     <link rel="stylesheet" href="style.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <!-- CSS flags -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <!-- fontAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
     <div id="app">
-        <div>
-            <input v-model="textToSearch" type="text">
-            <button @click="doSearch">
-                Cerca
-            </button>
-        </div>
+        <nav class="navbar navbar-dark bg-dark ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img class="img-resize" src="img/boolflix.png" alt=""></a>
+                <div>
+                    <input v-model="textToSearch" type="text">
+                    <button @click="doSearch">
+                        Cerca
+                    </button>
+                </div>
+        </nav>
+
 
         <!-- Ogni li dovrà stampare
     // 1.Titolo
@@ -31,14 +45,20 @@
 
         <ul>
             <li v-for="films in moviesList">
-                <p>Titolo: {{films.title}}  </p>
-                <p>Titolo Originale: {{films.original_title }}</p>
-                <p>Lingua: {{films.original_language }}</p>
-                
-                <p>Voto: {{films.vote_average }}</p>
+                <p>Titolo: {{films.title}} </p>
+                <p>Titolo Originale: {{films.original_title }} </p>
+                <img :src="getPoster(films)" alt="">
+                <p>Lingua: <span class="flag-icon"
+                        :class="'flag-icon-' + transformLanguageToFlag(films)"></span></p>
+
+                <p>Voto: {{films.vote_average }}    
+                    <i  v-for="star in getMovieStars(films)" style="background-color:yellowgreen"  class="fa star" :class="{
+                        'fas' : star === true, 'far':star === false }  "></i>
+                </p>
+
             </li>
         </ul>
-<!-- <span class="flag-icon flag-icon-querylang"></span> -->
+
     </div>
 
 

@@ -27,15 +27,31 @@ const lang2country = {
  // il ternario semplifica un blocco if/else in una riga
 */
 
-
+/* 
+Milestone 3:
+In questa millestone come prima cosa aggiungiamo la copertina del film o della serie
+al nostro elenco. Ci viene passata dall’API solo la parte finale dell’URL, questo
+perché poi potremo generare da quella porzione di URL tante dimensioni diverse.
+Dovremo prendere quindi l’URL base delle immagini di TMDB:
+https://image.tmdb.org/t/p/ per poi aggiungere la dimensione che vogliamo generare -
+componenti url img : base_url, a file_size and a file_path.
+Trasformiamo poi il voto da 1 a 10 decimale in un numero intero da 1 a 5, così da
+permetterci di stampare a schermo un numero di stelle piene che vanno da 1 a 5,
+lasciando le restanti vuote (troviamo le icone in FontAwesome).
+Arrotondiamo sempre per eccesso all’unità successiva, non gestiamo icone mezze
+piene.
+*/
 
 new Vue({
     el: '#app',
     data: {
+        // array dove inserire i risultati della ricerca - inseriti sia per  i films e serie TV poichè le chiamate differiscono..
         moviesList: [],
         tvSeriesList: [],
+        // v-model per verifica valori inseriti dall'user che saranno parte della mia chiamata API
         textToSearch: "",
         tmdbApiKey: "6b350ec46cfeb65b477fdc2bd01d820a",
+        img_baseUrl:"https://image.tmdb.org/t/p/",
         
     },
 
@@ -48,8 +64,6 @@ new Vue({
                     language: "it-IT",
                 }
             };
-
-
 
             /*
                     AVREI POTUTO SCRIVERE ANCHE COSI..
@@ -73,7 +87,6 @@ new Vue({
                                 query: this.textToSearch,
                                 language: "it-IT",
                                 }
-                        
 
                 */
             axios.get("https://api.themoviedb.org/3/search/" + searchType, axiosOptions)   
@@ -105,6 +118,11 @@ new Vue({
                     this.moviesList=this.moviesList
                 }
 
+            
+
+            })
+        },
+        transformLanguageToFlag(language) {
             const lang2country = { 
             'en': ['gb', 'us', 'ca'],
             'es': ['es', 'ar'],
@@ -112,14 +130,36 @@ new Vue({
             'fr':['fr'],
             'de':['de'],
             'cn':['cn'],
+            'pt':['pt'],
+            'ro':['ro'],
+            'jp':['jp'],
+            'zh':['ch'],
+            'ch':['ch'],
+            'ar':['ar'],
             };
+
             const  fallbackFlag ="va";
-            const queryLang = films.original_language ;
+            const queryLang = language.original_language ;
 
-            const candidatesCountries = Object.keys(lang2country).includes(queryLang) ? lang2country[queryLang] : [fallbackFlag];
-
-
-            })
+            const candidatesCountries = Object.keys(lang2country).includes(queryLang) ? lang2country[queryLang][0] : [fallbackFlag];
+            return candidatesCountries
+            
+        },
+        getPoster(film) {
+            const posterSize = "w342"
+            const posterPath = film.poster_path
+            const completePosterPath = this.img_baseUrl + posterSize + posterPath;
+            return completePosterPath
+        },
+        getMovieStars(movie){
+            const movieVote= Math.round(movie.vote_average / 2)
+            const toReturn =[]
+            for (let i = 0; i <= 5; i++) {
+                toReturn.push(i <= movieVote )
+                
+            }
+                return toReturn
+            
         },
         doSearch() {
             /*
@@ -128,15 +168,11 @@ new Vue({
                 -Dobbiamo comporre la query string da usare durante la chiamata alle api di TMDB    
                 -Eseguo la chiamata all'endpoint che mi serve, inviando la query string appena creata
                 -Nel then della risposta, andrò a salvare i dati che ricevo in una  variabile locale
-    
-    
-    
-                
             */
-
 
             this.makeAxiosSearch("movie")
             this.makeAxiosSearch("tv")
+            this.textToSearch = "";
 
         }
     },

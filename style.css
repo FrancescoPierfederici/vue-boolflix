@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.img-resize{
+    height: 100px;
+    width: 200px;
+}
+
+.bg-dark {
+    background-color: #201f1f!important;
+}
+
+body{
+    background-color: #201f1f;
+}
+button{
+    padding:5px;
+    border-radius: 5px;
+    
+}
+input{
+    padding:5px;
+}
+li{
+    color: white;
+    padding:30px 30px;
+    list-style: none;
+}
+ul{
+    display: flex;
+    flex-wrap: wrap;
+}
