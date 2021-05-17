@@ -33,7 +33,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><img class="img-resize" src="img/boolflix.png" alt=""></a>
                 <div>
-                    <input v-model="textToSearch" type="text">
+                    <input v-model="textToSearch" type="text" @keyup.enter="doSearch">
                     <button @click="doSearch">
                         Cerca
                     </button>
@@ -49,16 +49,26 @@
 
         <ul>
             <li v-for="films in moviesList">
-                <p>Titolo: {{films.title}} </p>
-                <p>Titolo Originale: {{films.original_title }} </p>
-                <img :src="getPoster(films)" alt="">
-                <p>Lingua: <span class="flag-icon"
-                        :class="'flag-icon-' + transformLanguageToFlag(films)"></span></p>
+                <div class="film-container">
+                    <img :src="getPoster(films)" alt="">
+                    <div class="overlay">
+                        <p> <strong> Titolo:</strong> {{films.title}} </p>
+                        <p><strong>Titolo Originale:</strong> {{films.original_title }} </p>
+                        <p><strong>Lingua:</strong> <span class="flag-icon"
+                                :class="'flag-icon-' + transformLanguageToFlag(films)"></span>
+                        </p>
 
-                <p>Voto: {{films.vote_average }}    
-                    <i  v-for="star in getMovieStars(films)" style="color:yellow"  class="fa-star" :class="{
-                        'fas' : star === true, 'far':star === false }  "></i>
-                </p>
+                        <p><strong>Voto:</strong> 
+                            <i v-for="star in getMovieStars(films)" style="color:rgb(245, 192, 17)" class="fa-star"
+                                :class="{
+                            'fas' : star === true, 'far':star === false }  "></i>
+                        </p>
+                        <p ><strong>Overview:</strong> {{getPosterOverview(films)}}  </p>
+                    </div>
+                </div>
+
+
+
 
             </li>
         </ul>

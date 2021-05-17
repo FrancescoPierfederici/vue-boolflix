@@ -10,11 +10,11 @@
 }
 
 .bg-dark {
-    background-color: #201f1f!important;
+    background-color: black!important;
 }
 
 body{
-    background-color: #201f1f;
+    background-color:black  ;
 }
 button{
     padding:5px;
@@ -26,10 +26,31 @@ input{
 }
 li{
     color: white;
-    padding:30px 30px;
+    padding:20px 15px;
     list-style: none;
 }
 ul{
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
+}
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+    /*transition: .3s ease;*/
+    display: none;
+    background-color:black ;
+}
+
+.film-container:hover .overlay {
+    display: block;
+}
+
+.film-container {
+    position: relative;
 }

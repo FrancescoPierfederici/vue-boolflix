@@ -42,6 +42,17 @@ Arrotondiamo sempre per eccesso all’unità successiva, non gestiamo icone mezz
 piene.
 */
 
+
+// Milestone 4:
+// Trasformiamo quello che abbiamo fatto fino ad ora in una vera e propria webapp,
+// creando un layout completo simil-Netflix:
+// ● Un header che contiene logo e search bar
+// ● Dopo aver ricercato qualcosa nella searchbar, i risultati appaiono sotto forma
+// di “card” in cui lo sfondo è rappresentato dall’immagine di copertina (consiglio
+// la poster_path con w342)
+// ● Andando con il mouse sopra una card (on hover), appaiono le informazioni
+// aggiuntive già prese nei punti precedenti più la overview
+
 new Vue({
     el: '#app',
     data: {
@@ -52,6 +63,7 @@ new Vue({
         textToSearch: "",
         tmdbApiKey: "6b350ec46cfeb65b477fdc2bd01d820a",
         img_baseUrl:"https://image.tmdb.org/t/p/",
+        noImg_Url : "img/noposter.png",
         
     },
 
@@ -112,6 +124,7 @@ new Vue({
                          */
                         tvShow.original_title = tvShow.original_name
                         tvShow.title = tvShow.name
+                        tvShow.tvSeries= true
                         return tvShow
                     })
                     this.moviesList.concat(this.tvSeriesList)
@@ -122,6 +135,29 @@ new Vue({
 
             })
         },
+         
+        // getCast(movie){
+            
+        //     const axiosOptions = {
+        //         params: {
+        //             api_key: this.tmdbApiKey,
+        //             language: "it-IT",
+        //         }
+        //     };
+        //     const movieType = movie.tvSeries ? "tv": "movie"
+        //     axios.get(`https://api.themoviedb.org/3/${movieType}/${movie.id}/credits`, axiosOptions)   
+        //     .then((resp) => {
+        //         this.$set(movie,"actors"  resp.data.cast
+
+
+        //     })
+        // },
+
+
+
+
+
+
         transformLanguageToFlag(language) {
             const lang2country = { 
             'en': ['gb', 'us', 'ca'],
@@ -160,6 +196,13 @@ new Vue({
             }
                 return toReturn
             
+        },
+        getPosterOverview(film){
+            if(film.overview){
+                return  film.overview.substring(0,150) + "..."
+            }else{
+                return "Non Disponibile"
+            }
         },
         doSearch() {
             /*
