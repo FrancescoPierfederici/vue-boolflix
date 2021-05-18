@@ -136,22 +136,22 @@ new Vue({
             })
         },
          
-        // getCast(movie){
+         getCast(movie){
             
-        //     const axiosOptions = {
-        //         params: {
-        //             api_key: this.tmdbApiKey,
-        //             language: "it-IT",
-        //         }
-        //     };
-        //     const movieType = movie.tvSeries ? "tv": "movie"
-        //     axios.get(`https://api.themoviedb.org/3/${movieType}/${movie.id}/credits`, axiosOptions)   
-        //     .then((resp) => {
-        //         this.$set(movie,"actors"  resp.data.cast
+             const axiosOptions = {
+                 params: {
+                     api_key: this.tmdbApiKey,
+                     language: "it-IT",
+                 }
+             };
+             const movieType = movie.tvSeries ? "tv": "movie"
+             axios.get(`https://api.themoviedb.org/3/${movieType}/${movie.id}/credits`, axiosOptions)   
+             .then((resp) => {
+                 this.$set(movie,"actors" , resp.data.cast)
 
 
-        //     })
-        // },
+             })
+         },
 
 
 

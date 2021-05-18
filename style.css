@@ -21,6 +21,21 @@ button{
     border-radius: 5px;
     
 }
+.box{
+    width: 100%; 
+    height: 100%;
+    
+    
+    /* border: 1px solid lightslategray; */
+}
+.noImgTitle{
+    position: relative;
+    display: block;
+    color: rgb(161, 23, 23);
+    bottom: 40px;
+    text-align: center;
+    
+}
 input{
     padding:5px;
 }
