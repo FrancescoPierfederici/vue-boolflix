@@ -48,7 +48,7 @@
     // 4.Voto -->
 
         <ul>
-            <li v-for="films in moviesList">
+            <li v-for="films in fullMoviesList">
                 <div class="film-container">
                     <!-- <div>
                         <img :src="getPoster(films)" alt="">
@@ -73,9 +73,15 @@
                             'fas' : star === true, 'far':star === false }  "></i>
                         </p>
                         <p><strong>Overview:</strong> {{getPosterOverview(films)}} </p>
-                        <p v-if="films.actors">
-                            <span v-for="actor in films.actors.slice(0,5)"> {{actor.original_name}}  </span>
-                        </p>
+                        <div >
+                            <a class="noStyle" href="#" @click="getCast(films)"> <strong>Click to discover the Cast:</strong> </a>
+                            <span v-if="films.actors"> 
+                                <span v-for="actors in films.actors.slice(0,7) ">{{actors.original_name}} </span>
+                            </span>
+                        </div>              
+                        <!-- <p   v-if="films.actors">
+                            <span v-for="actor in films.actors.slice(0,5) > {{actors.original_name}}+ {{  </span>
+                        </p> -->
                     </div>
                 </div>
 

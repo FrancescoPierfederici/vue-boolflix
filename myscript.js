@@ -64,7 +64,13 @@ new Vue({
         tmdbApiKey: "6b350ec46cfeb65b477fdc2bd01d820a",
         img_baseUrl:"https://image.tmdb.org/t/p/",
         noImg_Url : "img/noposter.png",
+        currenMovie:null,
         
+    },
+    computed:{
+        fullMoviesList(){
+            return this.moviesList.concat(this.tvSeriesList)
+        }
     },
 
     methods: {
@@ -127,8 +133,8 @@ new Vue({
                         tvShow.tvSeries= true
                         return tvShow
                     })
-                    this.moviesList.concat(this.tvSeriesList)
-                    this.moviesList=this.moviesList
+                    // this.moviesList.concat(this.tvSeriesList)
+                    // this.moviesList=this.moviesList
                 }
 
             
@@ -137,6 +143,9 @@ new Vue({
         },
          
          getCast(movie){
+             if(movie.actors){
+                 return;
+             }
             
              const axiosOptions = {
                  params: {
@@ -144,10 +153,10 @@ new Vue({
                      language: "it-IT",
                  }
              };
-             const movieType = movie.tvSeries ? "tv": "movie"
+             const movieType = movie.tvSeries ? "tv": "movie";
              axios.get(`https://api.themoviedb.org/3/${movieType}/${movie.id}/credits`, axiosOptions)   
              .then((resp) => {
-                 this.$set(movie,"actors" , resp.data.cast)
+                 this.$set(movie,"actors" , resp.data.cast);
 
 
              })
