@@ -186,7 +186,7 @@ new Vue({
             const  fallbackFlag ="va";
             const queryLang = language.original_language ;
 
-            const candidatesCountries = Object.keys(lang2country).includes(queryLang) ? lang2country[queryLang][0] : [fallbackFlag];
+            const candidatesCountries = Object.keys(lang2country).includes(queryLang) ? lang2country[queryLang][0] : fallbackFlag;
             return candidatesCountries
             
         },
@@ -199,7 +199,7 @@ new Vue({
         getMovieStars(movie){
             const movieVote= Math.round(movie.vote_average / 2)
             const toReturn =[]
-            for (let i = 0; i <= 5; i++) {
+            for (let i = 0; i <= 4; i++) {
                 toReturn.push(i <= movieVote )
                 
             }

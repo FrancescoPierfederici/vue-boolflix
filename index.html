@@ -72,9 +72,9 @@
                                 :class="{
                             'fas' : star === true, 'far':star === false }  "></i>
                         </p>
-                        <p><strong>Overview:</strong> {{getPosterOverview(films)}} </p>
+                        <p><strong>Descrizione:</strong> {{getPosterOverview(films)}} </p>
                         <div >
-                            <a class="noStyle" href="#" @click="getCast(films)"> <strong>Click to discover the Cast:</strong> </a>
+                            <a class="noStyle" href="#" @click="getCast(films)"> <strong>Clicca per scoprire il Cast:</strong> </a>
                             <span v-if="films.actors"> 
                                 <span v-for="actors in films.actors.slice(0,7) ">{{actors.original_name}} </span>
                             </span>
