@@ -2,7 +2,7 @@
 
 A fast, Netflix-inspired search experience for movies and TV series, powered by TheMovieDB API. Built with Vue.js as my first real component-based project.
 
-![Boolflix preview](preview.png)
+![Boolflix preview](img/boolflix2.png)
 
 > **How to try it:** the homepage starts empty by design. Type a movie or TV show title in the search bar in the top right (try "domani", "godfather" or "stranger things"), and the matching titles will appear with poster, language and rating.
 
